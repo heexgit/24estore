@@ -1,7 +1,7 @@
 <?php
 namespace TwentyTwoEstore\Libs;
 
-class CurlProxy implements IProxy
+class CurlTransfererFacade implements ITransfererFacade
 {
 	private $host;
 
@@ -12,7 +12,7 @@ class CurlProxy implements IProxy
 	 */
 	public function __construct ($host)
 	{
-		if (!CurlProxy::isAvailable()){
+		if (!CurlTransfererFacade::isAvailable()){
 			throw new \RuntimeException('libcurl library version 7.10.5 or late is required');
 		}
 
