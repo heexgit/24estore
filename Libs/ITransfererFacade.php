@@ -1,7 +1,7 @@
 <?php
 namespace TwentyTwoEstore\Libs;
 
-interface IProxy
+interface ITransfererFacade
 {
 	/**
 	 * Set the url of host

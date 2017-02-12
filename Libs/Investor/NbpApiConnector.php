@@ -53,7 +53,7 @@ class NbpApiConnector implements IExchangeConnector
 		$this->normalizeDate($startDate);
 		$this->normalizeDate($endDate);
 
-		$curl = new Libs\CurlProxy(self::API_URL);
+		$curl = new Libs\CurlTransfererFacade(self::API_URL);
 
 		$bulkSize = new \DateInterval('P'.$this->packetSize().'D');
 		$stepSize = new \DateInterval('P'.($this->packetSize() + 1).'D');
