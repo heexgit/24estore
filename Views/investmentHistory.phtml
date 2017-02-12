@@ -27,9 +27,9 @@ echo '</main>';
 function drawBalanceBar (Libs\Investor\BoundaryBalance $balance)
 {
 	$total = $balance->countTotal()->round(0)->toFloat();
-	$width = $total * 0.00001;
+	$width = $total * 0.00003;
 
-	printf('<div class="bar" style="width:%dvw"></div>', $width);
+	printf('<div class="bar" style="width:%dpx"></div>', $width);
 }
 
 function drawBalanceInfo ($title, Libs\Investor\BoundaryBalance $balance)

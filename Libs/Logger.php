@@ -67,11 +67,7 @@ class Logger
 	{
 		$dirPath = str_replace(DIRECTORY_SEPARATOR.'Libs', DIRECTORY_SEPARATOR.'logs', __DIR__);
 
-		if (is_dir($dirPath)){
-			return $dirPath;
-		}
-
-		if (!mkdir($dirPath, 0700)) {
+		if (!is_dir($dirPath) && !mkdir($dirPath, 0700)) {
 			throw new IOException("Can't create a directory '$dirPath'");
 		}
 		return $dirPath;
