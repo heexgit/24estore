@@ -45,11 +45,12 @@ class NbpApiConnector implements IExchangeConnector
 
 	/**
 	 * (non-PHPdoc)
-	 * @see \TwentyTwoEstore\Libs\IExchangeConnector::getGoldExchangeRates()
+	 * @see \TwentyTwoEstore\Libs\IExchangeConnector::getExchangeRates()
 	 */
-	public function getGoldExchangeRates (\DateTime $startDate, \DateTime $endDate)
+	public function getExchangeRates ($stock, \DateTime $startDate, \DateTime $endDate)
 	{
-		$this->validateDays($startDate, $endDate);
+		$this->validateStock($stock);
+		$this->validateRange($startDate, $endDate);
 		$this->normalizeDate($startDate);
 		$this->normalizeDate($endDate);
 
@@ -70,7 +71,7 @@ class NbpApiConnector implements IExchangeConnector
 
 			$erroInfo = null;
 			$content = $curl->getResponse(
-					sprintf('%s/%s/%s/?format=%s', $this->methods['gold'], $this->getDateString($fromDate), $this->getDateString($toDate), $contentParserFormat),
+					sprintf('%s/%s/%s/?format=%s', $this->methods[$stock], $this->getDateString($fromDate), $this->getDateString($toDate), $contentParserFormat),
 
 					// response validation method
 					function ($response) use ($fromDate, $toDate, &$erroInfo){
@@ -165,10 +166,27 @@ class NbpApiConnector implements IExchangeConnector
 	}
 
 	/**
+	 * @param string $stock
+	 * @throws Libs\ExecuteException
+	 */
+	private function validateStock ($stock)
+	{
+		if (empty($stock)){
+			throw new Libs\ExecuteException("\$stock can't be empty");
+		}
+		if (!is_string($stock)){
+			throw new Libs\ExecuteException("\$stock has to be string; provided type: ".gettype($stock));
+		}
+		if (!isset($this->methods[$stock])){
+			throw new Libs\ExecuteException("unsupported stock '$stock'");
+		}
+	}
+
+	/**
 	 * @param \DateTime $date
 	 * @throws Libs\ExecuteException
 	 */
-	private function validateDays (\DateTime $startDate, \DateTime $endDate)
+	private function validateRange (\DateTime $startDate, \DateTime $endDate)
 	{
 		$this->validateDate($startDate);
 		$this->validateDate($endDate);

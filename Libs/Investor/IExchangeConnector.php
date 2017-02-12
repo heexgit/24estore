@@ -4,10 +4,11 @@ namespace TwentyTwoEstore\Libs\Investor;
 interface IExchangeConnector
 {
 	/**
-	 * Get exchange rates of Gold
+	 * Get exchange rates of specified Stock
+	 * @param string $stock
 	 * @param \DateTime $startDate
 	 * @param \DateTime $endDate
 	 * @return array
 	 */
-	public function getGoldExchangeRates (\DateTime $startDate, \DateTime $endDate);
+	public function getExchangeRates ($stock, \DateTime $startDate, \DateTime $endDate);
 }

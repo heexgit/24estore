@@ -37,7 +37,7 @@ try {
 	$contentParser = Libs\ContentParserFactory::produce(API_RESULT_FORAMT);
 
 	$nbp = new Libs\Investor\NbpApiConnector($contentParser);
-	$exchangeRates = $nbp->getGoldExchangeRates($investStartDate, $now);
+	$exchangeRates = $nbp->getExchangeRates(INVEST_STOCK, $investStartDate, $now);
 
 	$trendDetector = new Libs\Investor\TrendDetector();
 	$trends = $trendDetector->analyzeExchangeRates($exchangeRates);

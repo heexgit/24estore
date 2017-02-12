@@ -6,8 +6,8 @@ define('DEBUGMODE', true);
 
 // set localisation settings
 // @todo it shuld be done by localisation manager
-date_default_timezone_set('Pacific/Nauru');
-setlocale(LC_TIME, 'Polish_Poland');
+date_default_timezone_set('Pacific/Nauru');//Europe/Warsaw
+setlocale(LC_TIME, 'English_US');//Polish_Poland
 
 
 /*
